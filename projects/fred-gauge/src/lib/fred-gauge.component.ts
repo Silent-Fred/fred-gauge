@@ -39,9 +39,7 @@ export class FredGaugeComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() heightInPixels?: number;
 
   @Input() animationDurationInSeconds: number;
-  @Input() dialClass: string;
-  @Input() gaugeClass: string;
-  @Input() valueClass: string;
+  @Input() class?: string;
 
   @Output() animationFinished: EventEmitter<number> = new EventEmitter();
 
@@ -55,6 +53,10 @@ export class FredGaugeComponent implements OnInit, AfterViewInit, OnChanges {
     fill: 'cornflowerblue',
     stroke: '0',
   };
+
+  private readonly dialClass = 'dial';
+  private readonly gaugeClass = 'gauge';
+  private readonly valueClass = 'value';
 
   private templateElement?: HTMLTemplateElement;
 
@@ -71,9 +73,6 @@ export class FredGaugeComponent implements OnInit, AfterViewInit, OnChanges {
     this.label = '';
     this.diameterInPixels = 100;
     this.animationDurationInSeconds = 0.5;
-    this.dialClass = 'fredDefaultDial';
-    this.gaugeClass = 'fredDefaultGauge';
-    this.valueClass = 'fredDefaultValue';
   }
 
   ngOnInit(): void {
