@@ -103,20 +103,16 @@ The component can be configures with these parameters:
   - default: 0.5
   - Duration of the animation between two consecutive values displayed by the gauge.
 
-- *dialClass*
+- *class*
   - string
-  - default: `'fredDefaultDial'`
-  - Style class applied to the dial.
-
-- *gaugeClass*
-  - string
-  - default: `'fredDefaultGauge'`
-  - Style class applied to the gauge. (the arc that represents the value)
-
-- *valueClass*
-  - string
-  - default: `'fredDefaultValue'`
-  - Style class applied to the digital display in the centre of the gauge. Applies to the value and the label (if defined).
+  - default: *empty*
+  - Style class applied to the gauge graphic. The different parts of the graphic
+  are always generated with the classes:
+    - dial: for the dial
+    - gauge: for the arc (or full circle) representing the current value
+    - value: for the text in the centre of the display
+    
+    Selectors can be used to style the different elements. (cf. 'Styling')
 
 ### Events emitted by the component
 
@@ -125,27 +121,25 @@ an `animationFinished` event.
 
 ### Styling
 
-If all gauges in an app should use a consistent style, one possiblity is to provide
-the three style classes `fredDefaultDial`, `fredDefaultGauge` and `fredDefaultValue`
-as global styles. (cf. `angular.json` where to put those; have a look at
-`projects.my-project-name.architect.build.options.styles` if you're unsure)
+Styles should to be provided as global styles. (cf. `angular.json` where to put those;
+have a look at `projects.my-project-name.architect.build.options.styles` if you're unsure)
 
 Styles have to be SVG style attributes because the gauge will be an SVG image.
 
 As an example, the default values could look like this:
 
 ```css
-fred-gauge .fredDefaultDial {
+fred-gauge.myClass .dial {
   stroke:blanchedalmond;
   stroke-width: 3;
 }
 
-fred-gauge .fredDefaultGauge {
+fred-gauge.myClass .gauge {
   stroke:cadetblue;
   stroke-width: 5;
 }
 
-fred-gauge .fredDefaultValue {
+fred-gauge.myClass .value {
   fill:cadetblue;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
@@ -178,9 +172,7 @@ Angles are the default values in this case.
             [min]="0" [max]="100"
             [dialStartAngle]="90" [dialDegrees]="360"
             [value]="percentage" label="%"
-            gaugeClass="speedGauge"
-            dialClass="speedDial"
-            valueClass="speedValue">
+            class="speed">
 </fred-gauge>
 ```
 
